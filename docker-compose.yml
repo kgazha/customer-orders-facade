@@ -1,0 +1,24 @@
+services:
+  customer-service:
+    build:
+      dockerfile: ./external/CustomerService/Dockerfile
+    container_name: customer-service
+    restart: always
+    ports:
+      - "5005:5001"
+
+  orders-service:
+    build:
+      dockerfile: ./external/OrderService/Dockerfile
+    container_name: orders-service
+    restart: always
+    ports:
+      - "5011:5001"
+
+  customer-orders:
+    container_name: customer-orders
+    build:
+      dockerfile: ./src/CustomerOrders/Dockerfile
+      no_cache: true
+    ports:
+      - "5007:5001"
